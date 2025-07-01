@@ -10,7 +10,7 @@
         "supportsMultiPayloads": true,
         "maxDuration": 30,
         "memory": 512,
-        "includeFiles": "dist/**"
+        "includeFiles": "dist/"
       }
     },
     {
@@ -18,32 +18,24 @@
       "use": "@vercel/static"
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "/dist/index.js",
-      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+      "source": "/api/(.*)",
+      "destination": "/dist/index.js"
     },
     {
-      "src": "/files/(.*)",
-      "dest": "/dist/index.js",
-      "methods": ["GET", "POST", "OPTIONS"]
+      "source": "/files/(.*)",
+      "destination": "/dist/index.js"
     },
     {
-      "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|webp|avif))",
-      "dest": "/dist/public/$1",
-      "headers": {
-        "Cache-Control": "public, max-age=31536000, immutable"
-      }
+      "source": "/(.*\\.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|webp|avif))",
+      "destination": "/dist/public/$1"
     },
     {
-      "src": "/(.*)",
-      "dest": "/dist/public/index.html"
+      "source": "/(.*)",
+      "destination": "/dist/public/index.html"
     }
   ],
-  "env": {
-    "NODE_ENV": "production"
-  },
   "headers": [
     {
       "source": "/api/(.*)",
@@ -61,6 +53,18 @@
           "value": "Content-Type, Authorization"
         }
       ]
+    },
+    {
+      "source": "/(.*\\.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|webp|avif))",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     }
-  ]
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
 }
