@@ -20,25 +20,25 @@
   ],
   "rewrites": [
     {
-      "source": "/api/(.*)",
+      "source": "/api/:path*",
       "destination": "/dist/index.js"
     },
     {
-      "source": "/files/(.*)",
+      "source": "/files/:path*",
       "destination": "/dist/index.js"
     },
     {
-      "source": "/(.*\\.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|webp|avif))",
-      "destination": "/dist/public/$1"
+      "source": "/:path*.:ext(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|webp|avif)",
+      "destination": "/dist/public/:path*.:ext"
     },
     {
-      "source": "/(.*)",
+      "source": "/:path*",
       "destination": "/dist/public/index.html"
     }
   ],
   "headers": [
     {
-      "source": "/api/(.*)",
+      "source": "/api/:path*",
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
@@ -55,7 +55,7 @@
       ]
     },
     {
-      "source": "/(.*\\.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|webp|avif))",
+      "source": "/:path*.:ext(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|webp|avif)",
       "headers": [
         {
           "key": "Cache-Control",
