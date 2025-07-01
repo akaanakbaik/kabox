@@ -7,7 +7,10 @@
       "config": {
         "maxLambdaSize": "50mb",
         "runtime": "nodejs20.x",
-        "supportsMultiPayloads": true
+        "supportsMultiPayloads": true,
+        "maxDuration": 30,
+        "memory": 512,
+        "includeFiles": "dist/**"
       }
     },
     {
@@ -38,13 +41,6 @@
       "dest": "/dist/public/index.html"
     }
   ],
-  "functions": {
-    "dist/index.js": {
-      "maxDuration": 30,
-      "memory": 512,
-      "includeFiles": "dist/**"
-    }
-  },
   "env": {
     "NODE_ENV": "production"
   },
